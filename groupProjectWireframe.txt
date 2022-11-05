@@ -1,0 +1,58 @@
+(Offer Up type) Name?
+
+-pair program for back end (one take one model/controller)
+	- users
+	- items
+
+- Sarah config/server/init
+- Users(model & controllers) {Maria & Sarah}
+	- first name
+	- last name
+	- email
+	- password
+	- birthdate
+	- confirm password
+	- [items for sale] (*user model)
+- Items(models & controllers) {Jon & Chris}
+	- name
+	- cost
+	- details
+	- brief desc - length cap
+	- tags (categories)
+		- furniture
+		- clothing
+		- electronics
+		- outdoors
+		- toys
+		- home
+		- pets supply
+		- cars
+		- cleaning
+		- misc
+	- location
+	- images
+
+one to one for items to categories
+
+- Login/Reg
+	-form(user)
+- dashboard (open marketplace) with bootstrap cards
+	- cards(items - image, name, cost, brief desc)
+	- button - view
+- edit
+	- delete buttons
+	- form 
+- create
+	- form (items)
+- individual view
+	- buy(anyone) / edit & delete (validated owner)
+
+
+extras - responsive/bootstrap
+
+
+backlog - 
+- deployment
+- filter in dashboard view
+- search?
+
