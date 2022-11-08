@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema SecondHandSourcingSchema
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `SecondHandSourcingSchema` ;
 
 -- -----------------------------------------------------
 -- Schema SecondHandSourcingSchema
@@ -66,19 +67,19 @@ CREATE TABLE IF NOT EXISTS `SecondHandSourcingSchema`.`items` (
   `details` VARCHAR(255) NOT NULL,
   `created_at` DATETIME NULL DEFAULT NOW(),
   `updated_at` VARCHAR(45) NULL DEFAULT 'NOW() ON UPDATE NOW()',
-  `users_id` INT NOT NULL,
-  `categories_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `category_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_items_users_idx` (`users_id` ASC) VISIBLE,
-  INDEX `fk_items_categories1_idx` (`categories_id` ASC) VISIBLE,
+  INDEX `fk_items_users_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_items_categories1_idx` (`category_id` ASC) VISIBLE,
   CONSTRAINT `fk_items_users`
-    FOREIGN KEY (`users_id`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `SecondHandSourcingSchema`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_items_categories1`
-    FOREIGN KEY (`categories_id`)
+    FOREIGN KEY (`category_id`)
     REFERENCES `SecondHandSourcingSchema`.`categories` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
