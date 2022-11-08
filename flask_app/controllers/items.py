@@ -6,7 +6,7 @@ from flask_app.models.item import Item
 @app.route('/new/item')
 def newItem():
     if 'users_id' not in session:
-        return render_template('')
+        return render_template('logreg.html')
     else:
         data = {
             'id': session['users_id']
@@ -35,7 +35,7 @@ def createItem():
 @app.route('/edit/<int:items_id>')
 def editItem(items_id):
     if 'users_id' not in session:
-        return render_template('index.html')
+        return render_template('logreg.html')
     else:
         dataUser = {
             'id': session['users_id']
@@ -68,7 +68,7 @@ def updateItem(items_id):
 @app.route('/item/view/<int:items_id>')
 def viewSasquatch(items_id):
     if 'users_id' not in session:
-        return render_template('index.html')
+        return render_template('logreg.html')
     else:
         dataUser = {
             'id': session['users_id']
