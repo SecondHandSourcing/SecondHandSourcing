@@ -11,7 +11,7 @@ class Item:
         self.cost = data ['cost']
         self.location = data ['location']
         self.image = data['image']
-        self.breif_desc = data ['breif_desc']
+        self.brief_desc = data ['brief_desc']
         self.details = data ['details']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
@@ -38,7 +38,7 @@ class Item:
             SELECT *
             FROM items
             WHERE id = %(id)s;
-        """
+            """
         results = connectToMySQL(cls.db).query_db(query, data)
         if len(results) < 1:
             return False
@@ -49,7 +49,7 @@ class Item:
         query = """
             INSERT INTO items (item_name, cost, location, image, breif_desc, details, user_id, categories_id)
             VALUES (%(item_name)s, %(cost)s, %(location)s, %(image)s, %(breif_desc)s, %(details)s, %(user_id)s, %(categories_id)s);
-        """
+            """
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
@@ -77,7 +77,7 @@ class Item:
             LEFT JOIN items
             ON users.id = items.user_id
             WHERE id = %(id)s;
-        """
+            """
         result = connectToMySQL(cls.db).query_db(query, data)
         user_with_items = cls(result[0])
         for each_item in result:
@@ -95,7 +95,7 @@ class Item:
                 'category_id' : each_item['categories_id']
         }
         single_item = Item(item_data)
-        user_with_items.item_list.append(single_item)
+        user_with_items.items.append(single_item)
         return user_with_items
 
     @staticmethod
