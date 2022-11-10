@@ -3,7 +3,20 @@ from flask import render_template, redirect, session, request, flash
 # from flask_app.models.user import User
 from flask_app.models.item import Item
 
-@app.route('/new/item')
+@app.route('/dashboard')
+def itemsDashboard():
+    if 'users_id' not in session:
+        return redirect('/')
+    else:
+        data = {
+            'id': session['users_id']
+        }
+        users = User.get_all()
+        user = User.get_one(data)
+        items = Item.get_all()
+        return render_template('dashboard.html', user = user, users=users, items=items)
+
+@app.route('/item/add')
 def newItem():
     if 'users_id' not in session:
         return render_template('logreg.html')
@@ -14,11 +27,11 @@ def newItem():
         user = User.get_one(data)
         return render_template('create.html', user=user)
 
-@app.route('/create/item', methods=['POST'])
+@app.route('/item/create', methods=['POST'])
 def createItem():
     isValid = Item.validate(request.form)
     if not isValid:
-        return redirect('/new/item')
+        return redirect('/item/add')
     else:
         data = {
             'item_name': request.form['item_name'],
@@ -32,7 +45,7 @@ def createItem():
         Item.save(data)
         return redirect('/dashboard')
 
-@app.route('/edit/<int:items_id>')
+@app.route('/item/<int:items_id>/edit')
 def editItem(items_id):
     if 'users_id' not in session:
         return render_template('logreg.html')
@@ -47,11 +60,11 @@ def editItem(items_id):
         item = Item.get_one(dataItem)
         return render_template('edit.html', user=user, item=item)
 
-@app.route('/item/update/<int:items_id>', methods=['POST'])
+@app.route('/item/<int:items_id>/update', methods=['POST'])
 def updateItem(items_id):
     isValid = Item.validate(request.form)
     if not isValid:
-        return redirect(f"/edit/{items_id}")
+        return redirect(f"/item/{items_id}/edit")
     else:
         data = {
             'id': items_id,
@@ -65,7 +78,7 @@ def updateItem(items_id):
         Item.update(data)
         return redirect('/dashboard')
 
-@app.route('/item/view/<int:items_id>')
+@app.route('/item/<int:items_id>')
 def viewItem(items_id):
     if 'users_id' not in session:
         return render_template('logreg.html')
@@ -79,9 +92,9 @@ def viewItem(items_id):
         users = User.get_all()
         user = User.get_one(dataUser)
         item = Item.get_one(dataItem)
-        return render_template('view.html', users=users, user=user, item=item)
+        return render_template('detail.html', users=users, user=user, item=item)
 
-@app.route('/item/delete/<int:items_id>')
+@app.route('/item/<int:items_id>/delete')
 def deleteItems(items_id):
     dataItem = {
         'id': items_id

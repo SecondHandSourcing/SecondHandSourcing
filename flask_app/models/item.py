@@ -16,13 +16,16 @@ class Item:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
-        self.categories_id = data ['categories_id']
+        self.category_id = data ['categories_id']
         self.user = None
         self.category = None
 
     @classmethod
     def get_all(cls):
-        query = 'SELECT * FROM items;'
+        query = """
+            SELECT * 
+            FROM items;
+        """
         results = connectToMySQL(cls.db).query_db(query)
         items = []
         for row in results:
@@ -31,7 +34,11 @@ class Item:
 
     @classmethod
     def get_one(cls, data):
-        query = 'SELECT * FROM items WHERE id = %(id)s;'
+        query = """
+            SELECT *
+            FROM items
+            WHERE id = %(id)s;
+        """
         results = connectToMySQL(cls.db).query_db(query, data)
         if len(results) < 1:
             return False
@@ -39,33 +46,39 @@ class Item:
 
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO items (item_name, cost, location, image, breif_desc, details, user_id, categories_id) VALUES (%(item_name)s, %(cost)s, %(location)s, %(image)s, %(breif_desc)s, %(details)s, %(user_id)s, %(categories_id)s);'
+        query = """
+            INSERT INTO items (item_name, cost, location, image, breif_desc, details, user_id, categories_id)
+            VALUES (%(item_name)s, %(cost)s, %(location)s, %(image)s, %(breif_desc)s, %(details)s, %(user_id)s, %(categories_id)s);
+        """
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
     def update(cls, data):
-        query = 'UPDATE items SET item_name = %(item_name)s, cost = %(cost)s, location = %(location)s, image = %(image)s, breif_desc = %(breif_desc)s, details = %(details)s WHERE id = %(id)s'
+        query = """
+            UPDATE items 
+            SET item_name = %(item_name)s, cost = %(cost)s, location = %(location)s, image = %(image)s, breif_desc = %(breif_desc)s, details = %(details)s WHERE id = %(id)s;
+        """
         print('update', data)
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
     def delete(cls, data):
-        query = "DELETE FROM items WHERE id = %(id)s"
+        query = """
+            DELETE FROM items
+            WHERE id = %(id)s;
+        """
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
     def get_user_items_by_user_id(cls, data):
-        # Left join statement for items and users relationship
         query = """
-                SELECT * 
-                FROM users
-                LEFT JOIN items
-                ON users.id = items.user_id
-                WHERE id = %(id)s
-                """
-
+            SELECT * 
+            FROM users
+            LEFT JOIN items
+            ON users.id = items.user_id
+            WHERE id = %(id)s;
+        """
         result = connectToMySQL(cls.db).query_db(query, data)
-
         user_with_items = cls(result[0])
         for each_item in result:
             item_data = {
@@ -79,20 +92,24 @@ class Item:
                 'created_at' : each_item['created_at'],
                 'updated_at' : each_item['updated_at'],
                 'user_id' : each_item['user_id'],
-                'categories_id' : each_item['categories_id']
+                'category_id' : each_item['categories_id']
         }
         single_item = Item(item_data)
         user_with_items.item_list.append(single_item)
         return user_with_items
-            
-
-
-
-
-        pass
-
-    @classmethod
 
     @staticmethod
     def validate(item):
-        pass
+        isValid = True
+        if len(item['item_name']) < 2:
+            isValid = False
+            flash ('Please enter a name with at least 2 Characters!')
+        if len(item['location']) < 2:
+            isValid = False
+            flash ('Please enter a location with at least 2 Characters!')
+        if len(item['breif_desc']) > 25:
+            isValid = False
+            flash ('Description can be a maximum of 25 characters!')
+        if len(item['details']) < 2:
+            isValid = False
+            flash ('Please enter details with at least 2 Characters!')
