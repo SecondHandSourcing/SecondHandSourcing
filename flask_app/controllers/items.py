@@ -66,7 +66,7 @@ def updateItem(items_id):
         return redirect('/dashboard')
 
 @app.route('/item/view/<int:items_id>')
-def viewSasquatch(items_id):
+def viewItem(items_id):
     if 'users_id' not in session:
         return render_template('logreg.html')
     else:
