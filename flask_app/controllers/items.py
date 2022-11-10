@@ -19,13 +19,13 @@ def itemsDashboard():
 @app.route('/item/add')
 def newItem():
     if 'users_id' not in session:
-        return render_template('logreg.html')
+        return render_template('login.html')
     else:
         data = {
             'id': session['users_id']
         }
         user = User.get_one(data)
-        return render_template('create.html', user=user)
+        return render_template('createItem.html', user=user)
 
 @app.route('/item/create', methods=['POST'])
 def createItem():
@@ -48,7 +48,7 @@ def createItem():
 @app.route('/item/<int:items_id>/edit')
 def editItem(items_id):
     if 'users_id' not in session:
-        return render_template('logreg.html')
+        return render_template('login.html')
     else:
         dataUser = {
             'id': session['users_id']
@@ -58,7 +58,7 @@ def editItem(items_id):
             'id': items_id
         }
         item = Item.get_one(dataItem)
-        return render_template('edit.html', user=user, item=item)
+        return render_template('update.html', user=user, item=item)
 
 @app.route('/item/<int:items_id>/update', methods=['POST'])
 def updateItem(items_id):
@@ -81,7 +81,7 @@ def updateItem(items_id):
 @app.route('/item/<int:items_id>')
 def viewItem(items_id):
     if 'users_id' not in session:
-        return render_template('logreg.html')
+        return render_template('login.html')
     else:
         dataUser = {
             'id': session['users_id']

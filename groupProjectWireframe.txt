@@ -34,6 +34,14 @@
 
 one to one for items to categories
 
+
+front end assignments:
+1st priority - Register
+2nd - create
+3rd - individual view
+4th - update
+5th (Chris - psuedo code dashboard if time over weekend (cards for each item))
+
 - Login/Reg
 	-form(user)
 - dashboard (open marketplace) with bootstrap cards

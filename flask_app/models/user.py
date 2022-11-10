@@ -32,7 +32,7 @@ class User:
         ;"""
         user_id = connectToMySQL(cls.DB).query_db(query,data)
         session['user_id'] = user_id
-        session['user_name'] = f"{data['first_name'] data['last_name']}"
+        session['user_name'] = f"{data['first_name']}"
         return True
 
     @classmethod

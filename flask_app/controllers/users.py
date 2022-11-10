@@ -4,8 +4,8 @@ from flask_app.models import user, item, category
 from flask_app.controllers import items
 from flask import session
 
-@app.route('/register', methods=["POST"])
-def rgister_user():
+@app.route('/register/', methods=["POST"])
+def register_user():
     if user.User.create_user(request.form):
         return redirect ('/dashboard')
     return redirect('/')
