@@ -13,6 +13,8 @@ class Item:
         self.image = data['image']
         self.breif_desc = data ['breif_desc']
         self.details = data ['details']
+        self.created_at = data['created_at']
+        self.updated_at = data['updated_at']
         self.user_id = data['user_id']
         self.categories_id = data ['categories_id']
         self.user = None
@@ -52,9 +54,44 @@ class Item:
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
-    def itemUser(cls, data):
+    def get_user_items_by_user_id(cls, data):
         # Left join statement for items and users relationship
+        query = """
+                SELECT * 
+                FROM users
+                LEFT JOIN items
+                ON users.id = items.user_id
+                WHERE id = %(id)s
+                """
+
+        result = connectToMySQL(cls.db).query_db(query, data)
+
+        user_with_items = cls(result[0])
+        for each_item in result:
+            item_data = {
+                'id' : each_item['item.id'],
+                'item_name' : each_item['item_name'],
+                'cost' : each_item['cost'],
+                'location' : each_item['location'],
+                'image' : each_item['image'],
+                'breif_desc' : each_item['breif_desc'],
+                'details' : each_item['details'],
+                'created_at' : each_item['created_at'],
+                'updated_at' : each_item['updated_at'],
+                'user_id' : each_item['user_id'],
+                'categories_id' : each_item['categories_id']
+        }
+        single_item = Item(item_data)
+        user_with_items.item_list.append(single_item)
+        return user_with_items
+            
+
+
+
+
         pass
+
+    @classmethod
 
     @staticmethod
     def validate(item):
