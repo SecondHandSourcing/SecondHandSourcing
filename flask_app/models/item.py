@@ -60,7 +60,7 @@ class Item:
                 SELECT * 
                 FROM users
                 LEFT JOIN items
-                ON users.id = item.user_id
+                ON users.id = items.user_id
                 WHERE id = %(id)s
                 """
 
