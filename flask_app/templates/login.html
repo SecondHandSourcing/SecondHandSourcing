@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+</head>
+<body>
+    <!-- Jinja for error message -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <!-- this is the container div when we decide on a bootstrap library -->
+    <div>
+        <!-- Reg div -->
+        <div>
+            <h2>Register</h2>
+            <div>
+                <form action="/register" method = "post">
+                    <label for="first_name">
+                        <input type="text" name="first_name">
+                    </label>
+
+                    <label for="last_name">
+                        <input type="text" name="last_name">
+                    </label>
+
+                    <label for="email">
+                        <input type="email" name="email">
+                    </label>
+
+                    <label for="birthdate">
+                        <input type="date" name="birthdate">
+                    </label>
+
+                    <label for="password">
+                        <input type="password" name="password">
+                    </label>
+
+                    <label for="confirm_password">
+                        <input type="password" name="confirm_password">
+                    </label>
+
+                    <input type="submit" name="Register">
+                </form>
+            </div>
+        </div>
+
+        <!-- Login div -->
+        <div>
+            <h2>Login</h2>
+            <div>
+                <form action="/user/login" method="post"> 
+
+                    <label for="email">
+                        <input type="email" name="email">
+                    </label>
+
+                    <label for="password">
+                        <input type="password" name="password">
+                    </label>
+
+                    <input type="submit" name="Login">
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
