@@ -25,6 +25,7 @@ class User:
     @classmethod
     def create_user(cls,data):
         if not cls.validate_user_reg_data(data):
+            print ("Create user failed")
             return False
         data = cls.parse_registration_data(data)
         query = """
@@ -35,6 +36,7 @@ class User:
         if user_id != False: 
             session['user_id'] = user_id
             session['user_name'] = f"{data['first_name']}"
+            print ("User in session")
             return True
         else:
             return False
@@ -117,10 +119,10 @@ class User:
             flash('Your password needs to be at least eight characters long.', 'registration')
             is_valid = False
         if not EMAIL_REGEX.match(data['email']):
-            flash('please use a valid email address.', 'registration')
+            flash('Please use a valid email address.', 'registration')
             is_valid = False
         if User.get_user_by_email(data['email'].lower().strip()):
-            flash('that email is already in use.', 'registration')
+            flash('That email is already in use.', 'registration')
             is_valid = False
         if data['password'] != data['confirm_password']:
             flash ("Your passwords don't match.", 'registration')

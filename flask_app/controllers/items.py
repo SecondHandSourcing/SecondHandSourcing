@@ -1,6 +1,6 @@
 from flask_app import app
 from flask import render_template, redirect, session, request, flash
-# from flask_app.models.user import User
+from flask_app.models.user import User
 from flask_app.models.item import Item
 
 @app.route('/dashboard')
@@ -9,7 +9,7 @@ def itemsDashboard():
         return redirect('/')
     else:
         data = {
-            'id': session['users_id']
+            'id': session['user_id']
         }
         users = User.get_all()
         user = User.get_one(data)
