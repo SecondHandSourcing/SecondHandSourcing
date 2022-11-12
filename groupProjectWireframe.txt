@@ -36,7 +36,7 @@ one to one for items to categories
 
 
 front end assignments:
-1st priority - Register
+1st priority - login/register - jon psuedo coded (needs testing)
 2nd - create
 3rd - individual view
 4th - update
