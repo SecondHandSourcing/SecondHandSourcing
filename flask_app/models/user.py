@@ -49,7 +49,7 @@ class User:
         ;"""
         result = connectToMySQL(cls.DB).query_db(query, data)
         if result:
-            results = cls(result[0])
+            result = cls(result[0])
         return result
 
     @classmethod
