@@ -33,8 +33,12 @@ class User:
         ;"""
         user_id = connectToMySQL(cls.DB).query_db(query,data)
         if user_id != False: 
+            print("user_id is:", user_id)
             session['user_id'] = user_id
+            print("user_id in session is:", session['user_id'])
             session['user_name'] = f"{data['first_name']}"
+            print("username input:",  f"{data['first_name']}")
+            print("user_name is:", session['user_name'])
             return True
         else:
             return False

@@ -37,8 +37,8 @@ one to one for items to categories
 
 front end assignments:
 1st priority - login/register - jon psuedo coded (needs testing)
-2nd - create
-3rd - individual view
+2nd - create - Maria
+3rd - individual view - Sarah
 4th - update
 5th (Chris - psuedo code dashboard if time over weekend (cards for each item))
 
