@@ -5,24 +5,25 @@ from flask_app.models.item import Item
 
 @app.route('/dashboard')
 def itemsDashboard():
-    if 'users_id' not in session:
+    if 'user_id' not in session:
         return redirect('/')
     else:
         data = {
             'id': session['user_id']
         }
-        users = User.get_all()
-        user = User.get_one(data)
-        items = Item.get_all()
-        return render_template('dashboard.html', user = user, users=users, items=items)
+        # users = User.get_all()
+        # user = User.get_one(data)
+        # items = Item.get_all()
+        return render_template('dashboard.html')
+        # user = user, users=users, items=items)
 
 @app.route('/item/add')
 def newItem():
-    if 'users_id' not in session:
+    if 'user_id' not in session:
         return render_template('login.html')
     else:
         data = {
-            'id': session['users_id']
+            'id': session['user_id']
         }
         user = User.get_one(data)
         return render_template('createItem.html', user=user)
@@ -47,11 +48,11 @@ def createItem():
 
 @app.route('/item/<int:items_id>/edit')
 def editItem(items_id):
-    if 'users_id' not in session:
+    if 'user_id' not in session:
         return render_template('login.html')
     else:
         dataUser = {
-            'id': session['users_id']
+            'id': session['user_id']
         }
         user = User.get_one(dataUser)
         dataItem = {
@@ -80,11 +81,11 @@ def updateItem(items_id):
 
 @app.route('/item/<int:items_id>')
 def viewItem(items_id):
-    if 'users_id' not in session:
+    if 'user_id' not in session:
         return render_template('login.html')
     else:
         dataUser = {
-            'id': session['users_id']
+            'id': session['user_id']
         }
         dataItem = {
             'id': items_id
