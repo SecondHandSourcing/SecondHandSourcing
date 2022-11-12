@@ -1,4 +1,5 @@
 from flask_app import app
+from flask_app.models import item
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash, session
 import re
@@ -8,7 +9,7 @@ bcrypt = Bcrypt(app)
 
 class User:
 
-    DB = 'SecondHandSourcing'
+    DB = 'SecondHandSourcingSchema'
 
     def __init__(self, data):
         self.id = data['id']
@@ -31,9 +32,12 @@ class User:
         VALUES (%(first_name)s, %(last_name)s, %(email)s, %(birthdate)s, %(password)s)
         ;"""
         user_id = connectToMySQL(cls.DB).query_db(query,data)
-        session['user_id'] = user_id
-        session['user_name'] = f"{data['first_name']}"
-        return True
+        if user_id != False: 
+            session['user_id'] = user_id
+            session['user_name'] = f"{data['first_name']}"
+            return True
+        else:
+            return False
 
     @classmethod
     def get_user_by_email(cls, email):
@@ -45,8 +49,38 @@ class User:
         ;"""
         result = connectToMySQL(cls.DB).query_db(query, data)
         if result:
-            results = cls(result[0])
+            result = cls(result[0])
         return result
+
+    @classmethod
+    def get_user_items_by_user_id(cls, id):
+        data = {'id': id}
+        query = """
+            SELECT * 
+            FROM users
+            LEFT JOIN items
+            ON users.id = items.user_id
+            WHERE users.id = %(id)s
+            ;"""
+        result = connectToMySQL(cls.DB).query_db(query, data)
+        if result:
+            user_with_items = cls(result[0])
+            for each_item in result:
+                item_data = {
+                    'id' : each_item['items.id'],
+                    'item_name' : each_item['item_name'],
+                    'cost' : each_item['cost'],
+                    'location' : each_item['location'],
+                    'image' : each_item['image'],
+                    'brief_desc' : each_item['brief_desc'],
+                    'details' : each_item['details'],
+                    'created_at' : each_item['items.created_at'],
+                    'updated_at' : each_item['items.updated_at'],
+                    'user_id' : each_item['user_id'],
+                    'category_id' : each_item['category_id']
+                }
+                user_with_items.items.append(item.Item(item_data))
+        return user_with_items
 
     @classmethod
     def update_user (cls, data):

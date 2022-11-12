@@ -38,7 +38,7 @@ def createItem():
             'cost': request.form['cost'],
             'location': request.form['location'],
             'image': request.form['image'],
-            'breif_desc': request.form['breif_desc'],
+            'brief_desc': request.form['brief_desc'],
             'details': request.form['details'],
             'user_id': request.form['user_id']
         }
@@ -72,7 +72,7 @@ def updateItem(items_id):
             'cost': request.form['cost'],
             'location': request.form['location'],
             'image': request.form['image'],
-            'breif_desc': request.form['breif_desc'],
+            'brief_desc': request.form['brief_desc'],
             'details': request.form['details'],
         }
         Item.update(data)
@@ -92,7 +92,7 @@ def viewItem(items_id):
         users = User.get_all()
         user = User.get_one(dataUser)
         item = Item.get_one(dataItem)
-        return render_template('detail.html', users=users, user=user, item=item)
+        return render_template('viewItem.html', users=users, user=user, item=item)
 
 @app.route('/item/<int:items_id>/delete')
 def deleteItems(items_id):
