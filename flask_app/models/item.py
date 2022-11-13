@@ -16,7 +16,7 @@ class Item:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
-        self.category_id = data ['category_id']
+        self.category = data ['category']
         self.user = None
         self.category = None
 
@@ -48,8 +48,8 @@ class Item:
     @classmethod
     def save(cls, data):
         query = """
-            INSERT INTO items (item_name, cost, location, image, brief_desc, details, user_id, category_id)
-            VALUES (%(item_name)s, %(cost)s, %(location)s, %(image)s, %(brief_desc)s, %(details)s, %(user_id)s, %(category_id)s);
+            INSERT INTO items (item_name, cost, location, image, brief_desc, details, user_id, category)
+            VALUES (%(item_name)s, %(cost)s, %(location)s, %(image)s, %(brief_desc)s, %(details)s, %(user_id)s, %(category)s);
             """
         return connectToMySQL(cls.db).query_db(query, data)
 
@@ -96,3 +96,4 @@ class Item:
             isValid = False
             print("details failed")
             flash ('Please enter details with at least 2 Characters!')
+        return isValid
