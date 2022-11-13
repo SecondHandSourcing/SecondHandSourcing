@@ -78,16 +78,21 @@ class Item:
         isValid = True
         if len(item['item_name']) < 2:
             isValid = False
+            print("item_name failed")
             flash ('Please enter a name with at least 2 Characters!')
         if len(item['cost']) <= 0:
             isValid = False
+            print("cost failed")
             flash ('Price must be greater than 0!')
         if len(item['location']) < 2:
             isValid = False
+            print("location failed")
             flash ('Please enter a location with at least 2 Characters!')
         if len(item['brief_desc']) > 25:
             isValid = False
+            print("brief_desc failed")
             flash ('Description can be a maximum of 25 characters!')
         if len(item['details']) < 2:
             isValid = False
+            print("details failed")
             flash ('Please enter details with at least 2 Characters!')

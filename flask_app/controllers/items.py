@@ -31,6 +31,7 @@ def newItem():
 def createItem():
     isValid = Item.validate(request.form)
     if not isValid:
+        print("Item not saved")
         return redirect('/item/add')
     else:
         data = {
