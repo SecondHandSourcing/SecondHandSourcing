@@ -23,6 +23,21 @@ class User:
         self.items = []
 
     @classmethod
+    def get_all(cls):
+        query = "SELECT * FROM users;"
+        results = connectToMySQL(cls.DB).query_db(query)
+        users=[]
+        for user in results:
+            users.append(cls(user))
+        return users
+
+    @classmethod
+    def get_one(cls,data):
+        query="SELECT * FROM users WHERE id=%(id)s;"
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        return cls(result[0])
+
+    @classmethod
     def create_user(cls,data):
         if not cls.validate_user_reg_data(data):
             print ("Create user failed")
@@ -109,6 +124,7 @@ class User:
         ;"""
         return connectToMySQL(cls.DB).query_db(query, data)
 
+    #Static Methods
     @staticmethod
     def validate_user_reg_data(data):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
