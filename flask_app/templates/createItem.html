@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Create Item</title>
+</head>
+<body class="m-5">
+    <!-- Jinja for error message -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    
+    <div>
+        <h1>Sell an item</h1>
+        
+        <form action="/item/create" method="post" class="form d-flex flex-column">
+            <label> Name:
+                <input type="text" name="item_name">
+            </label>
+            <label> Cost:
+                <input type="number" name="cost">
+            </label>
+            <label> Location (city, state):
+                <input type="text" name="location">
+            </label>
+            <label> Image:
+                <input type="text" name="image">
+            </label>
+            <label> Brief Description:
+                <input type="text" name="brief_desc">
+            </label>
+            <label> Details:
+                <input type="text" name="details">
+            </label>
+            </label>
+            <label> Category:
+                <input type="text" name="details">
+            </label>
+            <input type="submit" value="Create listing" class="btn btn-primary w-25">
+        </form>
+    </div>
+</body>
+</html>

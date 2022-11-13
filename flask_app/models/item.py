@@ -79,6 +79,9 @@ class Item:
         if len(item['item_name']) < 2:
             isValid = False
             flash ('Please enter a name with at least 2 Characters!')
+        if len(item['cost']) <= 0:
+            isValid = False
+            flash ('Price must be greater than 0!')
         if len(item['location']) < 2:
             isValid = False
             flash ('Please enter a location with at least 2 Characters!')

@@ -5,10 +5,11 @@ from flask_app.controllers import items
 from flask import session
 
 @app.route('/register', methods=["POST"])
-def register_user():
+def create_user():
     if user.User.create_user(request.form):
         return redirect ('/dashboard')
-    return redirect('/')
+    else:
+        return redirect('/')
 
 @app.route('/')
 def login_page():
@@ -18,7 +19,8 @@ def login_page():
 def login_user():
     if user.User.login_user(request.form):
         return redirect('/dashboard')
-    return redirect('/')
+    else:
+        return redirect('/')
 
 @app.route('/user/logout')
 def logout_user():

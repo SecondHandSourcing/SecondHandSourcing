@@ -23,8 +23,24 @@ class User:
         self.items = []
 
     @classmethod
+    def get_all(cls):
+        query = "SELECT * FROM users;"
+        results = connectToMySQL(cls.DB).query_db(query)
+        users=[]
+        for user in results:
+            users.append(cls(user))
+        return users
+
+    @classmethod
+    def get_one(cls,data):
+        query="SELECT * FROM users WHERE id=%(id)s;"
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        return cls(result[0])
+
+    @classmethod
     def create_user(cls,data):
         if not cls.validate_user_reg_data(data):
+            print ("Create user failed")
             return False
         data = cls.parse_registration_data(data)
         query = """
@@ -37,6 +53,7 @@ class User:
             session['user_id'] = user_id
             print("user_id in session is:", session['user_id'])
             session['user_name'] = f"{data['first_name']}"
+            print ("User in session")
             print("username input:",  f"{data['first_name']}")
             print("user_name is:", session['user_name'])
             return True
@@ -107,6 +124,7 @@ class User:
         ;"""
         return connectToMySQL(cls.DB).query_db(query, data)
 
+    #Static Methods
     @staticmethod
     def validate_user_reg_data(data):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -121,10 +139,10 @@ class User:
             flash('Your password needs to be at least eight characters long.', 'registration')
             is_valid = False
         if not EMAIL_REGEX.match(data['email']):
-            flash('please use a valid email address.', 'registration')
+            flash('Please use a valid email address.', 'registration')
             is_valid = False
         if User.get_user_by_email(data['email'].lower().strip()):
-            flash('that email is already in use.', 'registration')
+            flash('That email is already in use.', 'registration')
             is_valid = False
         if data['password'] != data['confirm_password']:
             flash ("Your passwords don't match.", 'registration')

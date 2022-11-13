@@ -11,11 +11,10 @@ def itemsDashboard():
         data = {
             'id': session['user_id']
         }
-        # users = User.get_all()
-        # user = User.get_one(data)
-        # items = Item.get_all()
-        return render_template('dashboard.html')
-        # user = user, users=users, items=items)
+        users = User.get_all()
+        user = User.get_one(data)
+        items = Item.get_all()
+        return render_template('dashboard.html', user = user, users=users, items=items)
 
 @app.route('/item/add')
 def newItem():
