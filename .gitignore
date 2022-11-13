@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#ignore config mysql connection updates
+flask_app/config/mysqlconnection.py
