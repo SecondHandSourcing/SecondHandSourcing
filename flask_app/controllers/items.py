@@ -54,7 +54,7 @@ def edit_item_page(id):
         dataItem = {
             'id': id
         }
-        item = Item.get_one(dataItem)
+        item = Item.get_item_by_id(id)
         return render_template('update.html', user=user, item=item)
 
 @app.route('/item/<int:id>/update', methods=['POST'])
