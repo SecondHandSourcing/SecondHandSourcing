@@ -20,12 +20,7 @@ def itemsDashboard():
 def newItem():
     if 'user_id' not in session:
         return render_template('login.html')
-    else:
-        data = {
-            'id': session['user_id']
-        }
-        user = User.get_one(data)
-        return render_template('createItem.html', user=user)
+    return render_template('createItem.html')
 
 @app.route('/item/create', methods=['POST'])
 def createItem():
@@ -41,7 +36,8 @@ def createItem():
             'image': request.form['image'],
             'brief_desc': request.form['brief_desc'],
             'details': request.form['details'],
-            'user_id': request.form['user_id']
+            'user_id': request.form['user_id'],
+            'category': request.form['category']
         }
         Item.save(data)
         return redirect('/dashboard')
