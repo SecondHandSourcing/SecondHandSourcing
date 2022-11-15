@@ -79,17 +79,8 @@ def updateItem(items_id):
 def viewItem(items_id):
     if 'user_id' not in session:
         return render_template('login.html')
-    else:
-        dataUser = {
-            'id': session['user_id']
-        }
-        dataItem = {
-            'id': items_id
-        }
-        users = User.get_all()
-        user = User.get_one(dataUser)
-        item = Item.get_one(dataItem)
-        return render_template('viewItem.html', users=users, user=user, item=item)
+    item = Item.get_one(items_id)
+    return render_template('viewItem.html', item=item)
 
 @app.route('/item/<int:items_id>/delete')
 def deleteItems(items_id):

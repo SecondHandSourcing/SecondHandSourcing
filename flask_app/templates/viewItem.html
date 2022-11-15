@@ -9,50 +9,57 @@
 </head>
 <body>
     <div class="container-md">
-        <div  class="row">
-            <div class="col text-center">
-                <h1 class="display-3">Second Hand Sourcing</h1>
-            </div>
-            <div class="col">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button href="/dashboard" type="button" class="btn btn-primary">Dashboard</button>
-                    <button href="/item/create" type="button" class="btn btn-primary">Add Item</button>
-                    <button href="/user/logout" type="button" class="btn btn-primary">Logout</button>
+        <!-- <div  class="row m-4"> -->
+        <nav class="navbar" style="background-color: #e3f2fd;">
+            <div class="container-fluid">
+                <!-- <a class="navbar-brand">Second Hand Sourcing</a> -->
+                <h1 class="display-6 fw-bold">Second Hand Sourcing</h1>
+                <!-- <div class="col text-center "> -->
+                <div class="btn-group " role="group" aria-label="Basic example">
+                    <a href="/dashboard"><button type="button" class="btn btn-primary">Dashboard</button></a>
+                    <a href="/item/add"><button type="button" class="btn btn-primary">Add Item</button></a>
+                    <a href="/user/logout"><button type="button" class="btn btn-primary">Logout</button></a>
                 </div>
+                <!-- </div> -->
             </div>
-        </div>
+        </nav>
         <div class="row">
             <div class="col-6 text-center">
-                <img class="rounded" src="{{item.image}}" alt="item image">
+                <img class="rounded  img-fluid me-5 border border-dark" src="{{item.image}}" alt="item image">
             </div>
-            <div class="col-4 text-start">
-                <div class="row ">
-                    <h2 class="display-5">{{item.item_name}}</h2>
+            <div class="col-4 text-start ms-5">
+                <div class="row mb-2">
+                    <h2 class="display-6 fw-bolder">{{item.item_name}}</h2>
                 </div>
                 <div class="row">
                     <p>${{item.cost}}</p>
                 </div>
                 <div class="row">
-                    <p>${{item.location}}</p>
+                    <p>
+                        <span class="fw-semibold">Location: </span>
+                        <span>{{item.location}}</span>
+                    </p>
                 </div>
                 <div class="row">
-                    <p>${{item.details}}</p>
+                    <p class="mb-1 fw-semibold">Details:</p>
+                    <p>{{item.details}}</p>
                 </div>
                 <div class="row"></div>
                 <div class="row">
-                    <p>${{item.category}}</p>
+                    <p class="mb-1 fw-semibold">Category: </p>
+                    <p class="ms-3">- {{item.category}}</p>
                 </div>
                 <div class="row"></div>
-                <div class="row">
-                    <div class="col text-center">
-                        <button href="/item/{{item.id}}/delete" type="button" class="btn btn-primary">Buy</button>
+                <div class="row mt-4 d-flex">
+                    <div class="col-5">
+                        <a href="/item/{{item.id}}/delete" class="btn btn-primary">Buy</a>
                     </div>
-                    {% if session['user_id'] in item_id %}
-                        <div class="col text-center">
-                            <button href="/item/{{item.id}}/update" type="button" class="btn btn-primary">Edit</button>
+                    {% if session['user_id'] == item.user_id %}
+                        <div class="col-2.5">
+                            <a href="/item/{{item.id}}/update" class="btn btn-primary">Edit</a>
                         </div>
-                        <div class="col text-center">
-                            <button href="/item/{{item.id}}/delete" type="button" class="btn btn-primary">Delete</button>
+                        <div class="col 2.5">
+                            <a href="/item/{{item.id}}/delete" class="btn btn-primary">Delete</a> 
                         </div>
                     {% endif %}
                 </div>
