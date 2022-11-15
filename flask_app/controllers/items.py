@@ -75,7 +75,7 @@ def update_item(id):
         Item.update(data)
         return redirect('/dashboard')
 
-@app.route('/item/<int:items_id>')
+@app.route('/item/<int:id>')
 def viewItem(id):
     if 'user_id' not in session:
         return render_template('login.html')
