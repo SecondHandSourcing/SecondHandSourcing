@@ -18,7 +18,6 @@ class Item:
         self.user_id = data['user_id']
         self.category = data ['category']
         self.user = None
-        self.category = None
 
     @classmethod
     def get_all(cls):
@@ -40,8 +39,10 @@ class Item:
         FROM items
         WHERE id = %(id)s;
         ;"""
-        results = connectToMySQL(cls.db).query_db(query, data)
-        return cls(results[0])
+        result = connectToMySQL(cls.db).query_db(query, data)
+        if result:
+            result=cls(result[0])
+        return result
 
     @classmethod
     def save(cls, data):
