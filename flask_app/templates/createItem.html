@@ -8,7 +8,7 @@
 
     <title>Create Item</title>
 </head>
-<body class="m-5">
+<body class="container-md">
     <!-- Jinja for error message -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -17,8 +17,16 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-    
-    <div>
+    <nav class="navbar p-2" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <h1 class="display-6 fw-bold">Second Hand Sourcing</h1>
+            <div class="btn-group " role="group" aria-label="Basic example">
+                <a href="/dashboard"><button type="button" class="btn btn-primary">Dashboard</button></a>
+                <a href="/user/logout"><button type="button" class="btn btn-primary">Logout</button></a>
+            </div>
+        </div>
+    </nav>
+    <div class="m-5">
         <h1>Sell an item</h1>
         
         <form action="/item/create" method="post" class="form d-flex flex-column">
