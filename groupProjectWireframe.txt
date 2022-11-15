@@ -1,3 +1,15 @@
+current standing:
+- login reg - styling (Chris)
+- Update form - styling (Sarah)
+- Add Navbar to htmls (Sarah)
+- add welcome username to navbar of dashboard -Sarah
+- viewItem - no padding
+Maria - QC
+
+- tomorrow one last finish 
+
+
+
 (Offer Up type) Name?
 
 -pair program for back end (one take one model/controller)
@@ -58,9 +70,12 @@ front end assignments:
 
 extras - responsive/bootstrap
 
+- pulling through category field to update form
+
 
 backlog - 
 - deployment
 - filter in dashboard view
 - add external API for address search
+
 

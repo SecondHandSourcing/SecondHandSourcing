@@ -63,8 +63,7 @@ class Item:
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
-    def delete_item_by_id(cls, id):
-        data = { 'id':id} 
+    def delete_item_by_id(cls, data):
         query = """
             DELETE FROM items
             WHERE id = %(id)s;
