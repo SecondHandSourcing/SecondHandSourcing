@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Item</title>
+</head>
+<body class="m-5">
+    <!-- Jinja for error message -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    
+    <div>
+        <h1>Update an item</h1>
+        
+        <form action="/item/{{ item.id }}/update" method="post" class="form d-flex flex-column">
+            <label> Name:
+                <input type="text" name="item_name" value = "{{ item.item_name }}">
+            </label>
+            <label> Cost:
+                <input type="number" name="cost" value = "{{ item.cost }}">
+            </label>
+            <label> Location (city, state):
+                <input type="text" name="location" value = "{{ item.location }}">
+            </label>
+            <label> Image:
+                <input type="text" name="image" value = "{{ item.image }}">
+            </label>
+            <label> Brief Description:
+                <input type="text" name="brief_desc" value = "{{ item.brief_desc }}">
+            </label>
+            <label> Details:
+                <input type="text" name="details" value = "{{ item.details }}">
+            </label>
+            <label> Category:
+                <select name="category">
+                    <option value="furniture">Furniture</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="outdoors">Outdoors</option>
+                    <option value="toys">Toys</option>
+                    <option value="home">Home</option>
+                    <option value="pet supply">Pet supply</option>
+                    <option value="cars">Cars</option>
+                    <option value="cleaning">Cleaning</option>
+                    <option value="miscellaneous">Miscellaneous</option>
+                </select>
+            </label>
+            <input type="hidden" name="user_id" value="{{session['user_id']}}">
+            <input type="submit" value="Update listing" class="btn btn-primary w-25">
+        </form>
+    </div>
+</body>
+</html>
