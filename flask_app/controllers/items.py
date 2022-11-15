@@ -58,7 +58,7 @@ def edit_item_page(id):
         return render_template('update.html', user=user, item=item)
 
 @app.route('/item/<int:id>/update', methods=['POST'])
-def update_item(id):
+def update_item_by_id(id):
     isValid = Item.validate(request.form)
     if not isValid:
         return redirect(f"/item/{id}/edit")
@@ -72,7 +72,7 @@ def update_item(id):
             'brief_desc': request.form['brief_desc'],
             'details': request.form['details'],
         }
-        Item.update(data)
+        Item.update_item_by_id(data)
         return redirect('/dashboard')
 
 @app.route('/item/<int:id>')
@@ -82,10 +82,10 @@ def viewItem(id):
     item = Item.get_item_by_id(id)
     return render_template('viewItem.html', item=item)
 
-@app.route('/item/<int:items_id>/delete')
-def deleteItems(items_id):
+@app.route('/item/<int:id>/delete')
+def delete_item_by_id(id):
     dataItem = {
-        'id': items_id
+        'id': id
     }
-    Item.delete(dataItem)
+    Item.delete_item_by_id(dataItem)
     return redirect('/dashboard')

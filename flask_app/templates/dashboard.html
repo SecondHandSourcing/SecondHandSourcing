@@ -5,27 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>Dashboard</title>
 </head>
-<body>
+<body class="container-md">
     <div>
-        <header>
-            <div>
-                <!-- Nav Bar From Sarah -->
+        <nav class="navbar p-2" style="background-color: #e3f2fd;">
+            <div class="container-fluid">
+                <h1 class="display-6 fw-bold">Second Hand Sourcing</h1>
+                <div class="btn-group " role="group" aria-label="Basic example">
+                    <a href="/dashboard"><button type="button" class="btn btn-primary">Dashboard</button></a>
+                    <a href="/item/add"><button type="button" class="btn btn-primary">Add Item</button></a>
+                    <a href="/user/logout"><button type="button" class="btn btn-primary">Logout</button></a>
+                </div>
             </div>
-            <div>
-                <!-- Nav Bar From Sarah -->
-            </div>
-        </header>
-        <main>
+        </nav>
+        <main class="d-flex justify-content-start">
             {% for item in items %}
-                <div class="card">
-                    <img src="{{item.image}}" alt="item image" class="card-img-top">
-                    <div class="card-body">
-                        <h2 class="card-title">{{item.name}}</h2>
+                <div class="card m-2" style="width: 18rem;">
+                    <div class="d-flex align-items-center" style="width: auto; height: 17rem;">
+                        <img src="{{item.image}}" alt="item image" class="p-1 img-fluid" style="max-height:17rem;">
+                    </div>
+                    <div class="card-body align-items-end" style="height: 14rem;">
+                        <h4 class="card-title">{{item.item_name}}</h4>
                         <div class="card-text">
-                            <p>{{item.prie}}</p>
-                            <p>{{item.breif_desc}}</p>
+                            <p>Cost: ${{item.cost}}</p>
+                            <p>Brief Description: {{item.brief_desc}}</p>
                         </div>
                         <div>
                                 <a href="/item/{{item.id}}" class="btn btn-info">View</a>
