@@ -11,31 +11,37 @@
     <div>
         <nav class="navbar p-2" style="background-color: #e3f2fd;">
             <div class="row container-fluid">
-                <h1 class="display-6 fw-bold">Second Hand Sourcing</h1>
-                <div class="btn-group " role="group" aria-label="Basic example">
-                    <a href="/dashboard"><button type="button" class="btn btn-primary">Dashboard</button></a>
-                    <a href="/item/add"><button type="button" class="btn btn-primary">Add Item</button></a>
-                    <a href="/user/logout"><button type="button" class="btn btn-primary">Logout</button></a>
+                <h1 class="display-6 fw-bold ml-3">Second Hand Sourcing</h1>
+                <div>
+                    <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+                    <a href="/item/add" class="btn btn-primary">Add Item</a>
+                    <a href="/user/logout" class="btn btn-primary">Logout</a>
                 </div>
             </div>
-            <div class="row container-fluid">
-                <p>Welcome {{user.first_name}}</p>
-            </div>
+            <!-- <div class="row container-fluid ml-2">
+                <p>Welcome, {{user.first_name}}!</p>
+            </div> -->
         </nav>
-        <main class="d-flex justify-content-start">
+        <div class="text-center m-4">
+            <h1>Welcome, {{user.first_name}}!</h1>
+        </div>
+        <main class="d-flex justify-content-start m-3">
             {% for item in items %}
-                <div class="card m-2" style="width: 18rem;">
-                    <div class="d-flex align-items-center" style="width: auto; height: 17rem;">
+                <div class="card m-3 border-secondary" style="width: 18rem;">
+                    <div class="card-header text-center" style="background-color: #e3f2fd;">
+                        <h4 class="card-title">{{item.item_name}}</h4>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center" style="width: auto; height: 17rem;">
                         <img src="{{item.image}}" alt="item image" class="p-1 img-fluid" style="max-height:17rem;">
                     </div>
                     <div class="card-body align-items-end" style="height: 14rem;">
-                        <h4 class="card-title">{{item.item_name}}</h4>
                         <div class="card-text">
-                            <p>Cost: ${{item.cost}}</p>
-                            <p>Brief Description: {{item.brief_desc}}</p>
+                            <p><b>Cost:</b> ${{item.cost}}</p>
+                            <p><b>Location:</b> {{item.location}}</p>
+                            <p><b>Brief Description:</b> {{item.brief_desc}}</p>
                         </div>
                         <div>
-                                <a href="/item/{{item.id}}" class="btn btn-info">View</a>
+                            <a href="/item/{{item.id}}" class="btn btn-info">View</a>
                         </div>
                     </div>
                 </div>

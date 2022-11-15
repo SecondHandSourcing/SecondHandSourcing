@@ -1,7 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from flask_app.models import user
-from flask_app.models import category
 
 class Item:
     db = 'SecondHandSourcingSchema'
@@ -89,7 +88,7 @@ class Item:
         if len(item['brief_desc']) > 25:
             isValid = False
             print("brief_desc failed")
-            flash ('Description can be a maximum of 25 characters!')
+            flash ('Brief description can be a maximum of 25 characters!')
         if len(item['details']) < 2:
             isValid = False
             print("details failed")

@@ -9,61 +9,57 @@
     <title>Create Item</title>
 </head>
 <body class="container-md">
-    <!-- Jinja for error message -->
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+    <!--Navbar-->
     <nav class="navbar p-2" style="background-color: #e3f2fd;">
-        <div class="container-fluid">
-            <h1 class="display-6 fw-bold">Second Hand Sourcing</h1>
-            <div class="btn-group " role="group" aria-label="Basic example">
-                <a href="/dashboard"><button type="button" class="btn btn-primary">Dashboard</button></a>
-                <a href="/user/logout"><button type="button" class="btn btn-primary">Logout</button></a>
+        <div class="row container-fluid">
+            <h1 class="display-6 fw-bold ml-3">Second Hand Sourcing</h1>
+            <div>
+                <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+                <a href="/item/add" class="btn btn-primary">Add Item</a>
+                <a href="/user/logout" class="btn btn-primary">Logout</a>
             </div>
         </div>
     </nav>
-    <div class="m-5">
+    <!--Main Container-->
+    <div class="m-5 w-50">
         <h1>Sell an item</h1>
-        
+        <!-- Jinja for error message -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        <!--Form-->
         <form action="/item/create" method="post" class="form d-flex flex-column">
-            <label> Name:
+            <label> Name: </label>
                 <input type="text" name="item_name">
-            </label>
-            <label> Cost:
+            <label class="mt-2"> Cost: </label>
                 <input type="number" name="cost">
-            </label>
-            <label> Location (city, state):
+            <label class="mt-2"> Location (city, state): </label>
                 <input type="text" name="location">
-            </label>
-            <label> Image:
+            <label class="mt-2"> Image: </label>
                 <input type="text" name="image">
-            </label>
-            <label> Brief Description:
+            <label class="mt-2"> Brief Description: </label>
                 <input type="text" name="brief_desc">
-            </label>
-            <label> Details:
+            <label class="mt-2"> Details:</label>
                 <input type="text" name="details">
-            </label>
-            <label> Category:
+            <label class="mt-2"> Category: </label>
                 <select name="category">
-                    <option value="furniture">Furniture</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="outdoors">Outdoors</option>
-                    <option value="toys">Toys</option>
-                    <option value="home">Home</option>
-                    <option value="pet supply">Pet supply</option>
-                    <option value="cars">Cars</option>
-                    <option value="cleaning">Cleaning</option>
-                    <option value="miscellaneous">Miscellaneous</option>
+                    <option value="Furniture">Furniture</option> 
+                    <option value="Clothing">Clothing</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Outdoors">Outdoors</option>
+                    <option value="Toys">Toys</option>
+                    <option value="Home">Home</option>
+                    <option value="Pet supply">Pet supply</option>
+                    <option value="Cars">Cars</option>
+                    <option value="Cleaning">Cleaning</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
                 </select>
-            </label>
             <input type="hidden" name="user_id" value="{{session['user_id']}}">
-            <input type="submit" value="Create listing" class="btn btn-primary w-25">
+            <input type="submit" value="Create listing" class="btn btn-info mt-3">
         </form>
     </div>
 </body>
