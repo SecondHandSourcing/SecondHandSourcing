@@ -77,5 +77,6 @@ backlog -
 - deployment
 - filter in dashboard view
 - add external API for address search
+- account button to edit user info
 
 

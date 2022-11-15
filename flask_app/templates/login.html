@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Login and Registration</title>
 </head>
 <body>
+    <!--Hero image-->
+    <div class="p-5 text-center bg-image" 
+        style=
+        "background-image: url('https://www.fdsrx.com/wp-content/uploads/handshake-neon-sign_1200.png');
+        background-size:cover;
+        background-repeat: no-repeat;
+        height: 850px;
+        width:100%">
+        <div class="d-flex justify-content-center align-items-center mt-5">
+            <div class="text-white">
+            <h1 class="mb-3">Welcome to Second Hand Sourcing</h1>
+            <h5 class="mb-4">The best software for giving items a second life</h5>
+            <a class="btn btn-outline-light btn-lg m-2" href="#reg-page">Register</a>
+            <a class="btn btn-outline-light btn-lg m-2" href="#login-page">Login</a>
+            </div>
+        </div>
+    </div>
     <!-- Jinja for error message -->
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -15,62 +33,43 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <!-- this is the container div when we decide on a bootstrap library -->
-    <div>
-        <!-- Reg div -->
+
+    <!--Form Container-->
+    <div class="d-flex justify-content-center">
+        <!-- Reg Form -->
         <div>
-            <h2>Register</h2>
+            <h2 id="reg-page" class="m-5">Register</h2>
             <div>
-                <form action="/register" method = "post">
-                    <label for="first_name"> First Name:
+                <form action="/register" method = "post" class="form d-flex flex-column m-5">
+                    <label for="first_name"> First Name: </label>
                         <input type="text" name="first_name">
-                    </label>
-
-                    <label for="last_name"> Last Name:
+                    <label for="last_name"> Last Name: </label>
                         <input type="text" name="last_name">
-                    </label>
-
-                    <label for="email"> Email:
+                    <label for="email"> Email: </label>
                         <input type="email" name="email">
-                    </label>
-
-                    <label for="birthdate"> Birthday:
+                    <label for="birthdate"> Birthday: </label>
                         <input type="date" name="birthdate">
-                    </label>
-
-                    <label for="password"> Password:
+                    <label for="password"> Password: </label>
                         <input type="password" name="password">
-                    </label>
-
-                    <label for="confirm_password"> Confirm Password:
+                    <label for="confirm_password"> Confirm Password: </label>
                         <input type="password" name="confirm_password">
-                    </label>
-
-                    <input type="submit" name="Register">
+                    <input type="submit" name="Register" class="btn btn-primary mt-3">
                 </form>
             </div>
         </div>
-
-        <!-- Login div -->
+        <!-- Login Form-->
         <div>
-            <h2>Login</h2>
+            <h2 id="login-page" class="m-5">Login</h2>
             <div>
-                <form action="/user/login" method="post"> 
-
-                    <label for="email"> Email:
+                <form action="/user/login" method="post" class="form d-flex flex-column m-5"> 
+                    <label for="email"> Email: </label>
                         <input type="email" name="email">
-                    </label>
-
-                    <label for="password"> Password:
+                    <label for="password"> Password: </label>
                         <input type="password" name="password">
-                    </label>
-
-                    <input type="submit" name="Login">
-
+                    <input type="submit" name="Login" class="btn btn-primary mt-3">
                 </form>
             </div>
         </div>
-
     </div>
 </body>
 </html>
