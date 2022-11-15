@@ -20,42 +20,44 @@
             </div>
         </nav>
         <!--Item Info-->
-        <div class="row m-4 mt-5 border border-dark d-flex justify-content-center" style="width: 60rem">
-            <div class="col-6 text-center d-flex align-items-center justify-content-center">
-                <img class="rounded img-fluid me-5 border border-dark" src="{{item.image}}" alt="item image">
-            </div>
-            <div class="col-4 text-start ms-5 mt-3">
-                <div class="row mb-2">
-                    <h2 class="display-6 fw-bolder">{{item.item_name}}</h2>
+        <div class="d-flex justify-content-center">
+            <div class="row m-4 mt-5 d-flex justify-content-center" style="width: 60rem">
+                <div class="col-6 text-center d-flex align-items-center justify-content-center">
+                    <img class="rounded img-fluid me-5 border border-dark" src="{{item.image}}" alt="item image">
                 </div>
-                <div class="row">
-                    <p><b>Cost:</b> ${{item.cost}}</p>
-                </div>
-                <div class="row">
-                    <p>
-                        <span class="fw-semibold"><b>Location:</b> </span>
-                        <span>{{item.location}}</span>
-                    </p>
-                </div>
-                <div class="row">
-                    <p class="mb-1 fw-semibold"><b>Details:</b></p>
-                    <p>{{item.details}}</p>
-                </div>
-                <div class="row">
-                    <p class="mb-1 fw-semibold"><b>Category: </b> </p>
-                    <p class="ms-3">  {{item.category}}</p>
-                </div>
-
-                <!--Buy, Edit, Delete Buttons-->
-                <div class="text-center">
-                    <div class="mb-3">
-                        <a href="/item/{{item.id}}/delete" class="btn btn-info btn-block">Buy</a>
+                <div class="col-4 text-start ms-5 mt-3">
+                    <div class="row mb-2">
+                        <h2 class="display-6 fw-bolder">{{item.item_name}}</h2>
                     </div>
-                    <div class="mb-4">
-                    {% if session['user_id'] == item.user_id %}
-                        <a href="/item/{{item.id}}/edit" class="btn btn-outline-info">Edit</a>
-                        <a href="/item/{{item.id}}/delete" class="btn btn-outline-info">Delete</a> 
-                    {% endif %}
+                    <div class="row">
+                        <p><b>Cost:</b> ${{item.cost}}</p>
+                    </div>
+                    <div class="row">
+                        <p>
+                            <span class="fw-semibold"><b>Location:</b> </span>
+                            <span>{{item.location}}</span>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="mb-1 fw-semibold"><b>Details:</b></p>
+                        <p>{{item.details}}</p>
+                    </div>
+                    <div class="row">
+                        <p class="mb-1 fw-semibold"><b>Category: </b> </p>
+                        <p class="ms-3">  {{item.category}}</p>
+                    </div>
+
+                    <!--Buy, Edit, Delete Buttons-->
+                    <div class="text-center">
+                        <div class="mb-3">
+                            <a href="/item/{{item.id}}/delete" class="btn btn-info btn-block">Buy</a>
+                        </div>
+                        <div class="mb-4">
+                        {% if session['user_id'] == item.user_id %}
+                            <a href="/item/{{item.id}}/edit" class="btn btn-outline-info">Edit</a>
+                            <a href="/item/{{item.id}}/delete" class="btn btn-outline-info">Delete</a> 
+                        {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
