@@ -42,8 +42,8 @@ def createItem():
         Item.save(data)
         return redirect('/dashboard')
 
-@app.route('/item/<int:items_id>/edit')
-def editItem(items_id):
+@app.route('/item/<int:id>/edit')
+def edit_item_page(id):
     if 'user_id' not in session:
         return render_template('login.html')
     else:
@@ -52,19 +52,19 @@ def editItem(items_id):
         }
         user = User.get_one(dataUser)
         dataItem = {
-            'id': items_id
+            'id': id
         }
-        item = Item.get_one(dataItem)
+        item = Item.get_item_by_id(id)
         return render_template('update.html', user=user, item=item)
 
-@app.route('/item/<int:items_id>/update', methods=['POST'])
-def updateItem(items_id):
+@app.route('/item/<int:id>/update', methods=['POST'])
+def update_item(id):
     isValid = Item.validate(request.form)
     if not isValid:
-        return redirect(f"/item/{items_id}/edit")
+        return redirect(f"/item/{id}/edit")
     else:
         data = {
-            'id': items_id,
+            'id': id,
             'item_name': request.form['item_name'],
             'cost': request.form['cost'],
             'location': request.form['location'],
@@ -76,10 +76,10 @@ def updateItem(items_id):
         return redirect('/dashboard')
 
 @app.route('/item/<int:items_id>')
-def viewItem(items_id):
+def viewItem(id):
     if 'user_id' not in session:
         return render_template('login.html')
-    item = Item.get_one(items_id)
+    item = Item.get_item_by_id(id)
     return render_template('viewItem.html', item=item)
 
 @app.route('/item/<int:items_id>/delete')

@@ -32,7 +32,7 @@ class Item:
         return items
 
     @classmethod
-    def get_one(cls, id):
+    def get_item_by_id(cls, id):
         data = {'id': id}
         query = """
         SELECT *
@@ -53,7 +53,7 @@ class Item:
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
-    def update(cls, data):
+    def update_item_by_id(cls, data):
         query = """
         UPDATE items 
         SET item_name = %(item_name)s, cost = %(cost)s, location = %(location)s, image = %(image)s, brief_desc = %(brief_desc)s, details = %(details)s 
@@ -63,7 +63,7 @@ class Item:
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
-    def delete(cls, id):
+    def delete_item_by_id(cls, id):
         data = { 'id':id} 
         query = """
             DELETE FROM items
