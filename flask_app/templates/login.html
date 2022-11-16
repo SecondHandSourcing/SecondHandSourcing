@@ -26,13 +26,6 @@
         </div>
     </div>
     <!-- Jinja for error message -->
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
 
     <!--Form Container-->
     <div class="d-flex justify-content-center">
@@ -54,6 +47,15 @@
                     <label for="confirm_password"> Confirm Password: </label>
                         <input type="password" name="confirm_password">
                     <input type="submit" name="Register" class="btn btn-primary mt-3">
+                    <div>
+                        {% with messages = get_flashed_messages(category_filter = ['registration']) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="alert alert-danger">{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
                 </form>
             </div>
         </div>
@@ -67,6 +69,15 @@
                     <label for="password"> Password: </label>
                         <input type="password" name="password">
                     <input type="submit" name="Login" class="btn btn-primary mt-3">
+                    <div>
+                        {% with messages = get_flashed_messages(category_filter = ['login']) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="alert alert-danger">{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
                 </form>
             </div>
         </div>

@@ -14,20 +14,13 @@
             <div>
                 <a href="/dashboard" class="btn btn-primary">Dashboard</a>
                 <a href="/item/add" class="btn btn-primary">Add Item</a>
-                <a href="/user/logout" class="btn btn-primary">Logout</a>
+                <a href="/user/logout" class="btn btn-danger">Logout</a>
             </div>
         </div>
     </nav>
     <div class="m-5">
         <h1>Update {{item.item_name}}</h1>
-        <!-- Jinja for error message -->
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+
         <form action="/item/{{ item.id }}/update" method="post" class="form d-flex flex-column w-50">
             <label class="mt-2"> Name:</label>
                 <input type="text" name="item_name" value = "{{ item.item_name }}">
@@ -56,6 +49,15 @@
                 </select>
             <input type="hidden" name="user_id" value="{{session['user_id']}}">
             <input type="submit" value="Update listing" class="btn btn-info mt-3">
+            <div>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="alert alert-danger">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
         </form>
     </div>
 </body>
