@@ -17,14 +17,11 @@
                     <a href="/user/logout" class="btn btn-danger">Logout</a>
                 </div>
             </div>
-            <!-- <div class="row container-fluid ml-2">
-                <p>Welcome, {{user.first_name}}!</p>
-            </div> -->
         </nav>
         <div class="text-center m-4">
             <h1>Welcome, {{user.first_name}}!</h1>
         </div>
-        <main class="d-flex justify-content-start m-3">
+        <main class="d-flex justify-content-start m-3 flex-wrap">
             {% for item in items %}
                 <div class="card m-3 border-secondary" style="width: 18rem;">
                     <div class="card-header text-center" style="background-color: #e3f2fd;">

@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `SecondHandSourcingSchema`.`items` (
   `item_name` VARCHAR(45) NOT NULL,
   `cost` INT NOT NULL,
   `location` VARCHAR(45) NOT NULL,
-  `image` VARCHAR(255) NOT NULL,
+  `image` TEXT(21845) NOT NULL,
   `brief_desc` VARCHAR(25) NOT NULL,
   `details` VARCHAR(255) NOT NULL,
   `created_at` DATETIME NULL DEFAULT NOW(),
